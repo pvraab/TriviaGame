@@ -59,13 +59,11 @@ $(document).ready(function () {
 
     // prevents the clock from being sped up unnecessarily
     var clockRunning = false;
-    var time = 0;
-    var lap = 1;
+    var time = 60;
 
     function reset() {
 
-        time = 0;
-        lap = 1;
+        time = 60;
 
         // DONE: Change the "display" div to "00:00."
         $("#display").text("00:00");
@@ -78,7 +76,7 @@ $(document).ready(function () {
 
         // DONE: Use setInterval to start the count here and set the clock to running.
         if (!clockRunning) {
-            intervalId = setInterval(count, 1000);
+            intervalId = setInterval(countIt, 1000);
             clockRunning = true;
         }
     }
@@ -90,10 +88,10 @@ $(document).ready(function () {
         clockRunning = false;
     }
 
-    function count() {
+    function countIt() {
 
         // DONE: increment time by 1, remember we cant use "this" here.
-        time++;
+        time--;
 
         // DONE: Get the current time, pass that into the timeConverter function,
         //       and save the result in a variable.
