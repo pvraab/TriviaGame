@@ -28,7 +28,7 @@ $(document).ready(function () {
 
         $("#wrapper").css('background-image', 'url("' + images[count] + '")');
 
-        // TODO: Use a setTimeout to run displayImage after 1 second.
+        // TODO: Use a setTimeout to run displayImage
         setTimeout(displayImage, 5000);
 
         // TODO: If the count is the same as the length of the image array, reset the count to 0.
@@ -41,44 +41,46 @@ $(document).ready(function () {
     function startSlideshow() {
 
         // TODO: Use showImage to hold the setInterval to run nextImage.
-        showImage = setInterval(nextImage, 3000);
+        showImage = setInterval(nextImage, 5000);
 
     }
 
     // Timer code here
     // This code will run as soon as the page loads
-    window.onload = function () {
-        start();
+    // window.onload = function () {
+    //     start();
         // $("#stop").on("click", stop);
         // $("#reset").on("click", reset);
         // $("#start").on("click", start);
-    };
+    // };
 
     //  Variable that will hold our setInterval that runs the stopwatch
     var intervalId;
 
     // prevents the clock from being sped up unnecessarily
     var clockRunning = false;
-    var time = 0;
-    var lap = 1;
+    var time = 30;
 
     function reset() {
 
-        time = 0;
-        lap = 1;
+        clockRunning = false;
+        time = 30;
 
-        // DONE: Change the "display" div to "00:00."
-        $("#display").text("00:00");
+        // DONE: Change the "display" div to "00:30."
+        $("#display").text("00:30");
 
-        // DONE: Empty the "laps" div.
-        $("#laps").text("");
+        start();
+
     }
 
     function start() {
 
+        console.log("In start");
+
         // DONE: Use setInterval to start the count here and set the clock to running.
         if (!clockRunning) {
-            intervalId = setInterval(count, 1000);
+            console.log("In clock running");
+            intervalId = setInterval(countIt, 1000);
             clockRunning = true;
         }
     }
@@ -90,10 +92,18 @@ $(document).ready(function () {
         clockRunning = false;
     }
 
-    function count() {
+    function countIt() {
+
+        console.log("In count");
 
         // DONE: increment time by 1, remember we cant use "this" here.
-        time++;
+        time--;
+
+        // Reset when zero
+        if (time === 0) {
+            stop();
+            reset();
+        }
 
         // DONE: Get the current time, pass that into the timeConverter function,
         //       and save the result in a variable.
@@ -102,8 +112,10 @@ $(document).ready(function () {
 
         // DONE: Use the variable we just created to show the converted time in the "display" div.
         $("#display").text(converted);
+
     }
 
+    // Convert time to minutes and seconds
     function timeConverter(t) {
 
         var minutes = Math.floor(t / 60);
@@ -122,95 +134,4 @@ $(document).ready(function () {
         return minutes + ":" + seconds;
     }
 
-
-    // Solution if you would like to put it in an object
-
-    // window.onload = function() {
-    //   $("#lap").on("click", stopwatch.recordLap);
-    //   $("#stop").on("click", stopwatch.stop);
-    //   $("#reset").on("click", stopwatch.reset);
-    //   $("#start").on("click", stopwatch.start);
-    // };
-
-    // //  Variable that will hold our setInterval that runs the stopwatch
-    // var intervalId;
-
-    // // prevents the clock from being sped up unnecessarily
-    // var clockRunning = false;
-
-    // // Our stopwatch object
-    // var stopwatch = {
-
-    //   time: 0,
-    //   lap: 1,
-
-    //   reset: function() {
-
-    //     stopwatch.time = 0;
-    //     stopwatch.lap = 1;
-
-    //     // DONE: Change the "display" div to "00:00."
-    //     $("#display").text("00:00");
-
-    //     // DONE: Empty the "laps" div.
-    //     $("#laps").text("");
-    //   },
-    //   start: function() {
-
-    //     // DONE: Use setInterval to start the count here and set the clock to running.
-    //     if (!clockRunning) {
-    //       intervalId = setInterval(stopwatch.count, 1000);
-    //       clockRunning = true;
-    //     }
-    //   },
-    //   stop: function() {
-
-    //     // DONE: Use clearInterval to stop the count here and set the clock to not be running.
-    //     clearInterval(intervalId);
-    //     clockRunning = false;
-    //   },
-    //   recordLap: function() {
-
-    //     // DONE: Get the current time, pass that into the stopwatch.timeConverter function,
-    //     //       and save the result in a variable.
-    //     var converted = stopwatch.timeConverter(stopwatch.time);
-
-    //     // DONE: Add the current lap and time to the "laps" div.
-    //     $("#laps").append("<p>Lap " + stopwatch.lap + " : " + converted + "</p>");
-
-    //     // DONE: Increment lap by 1. Remember, we can't use "this" here.
-    //     stopwatch.lap++;
-    //   },
-    //   count: function() {
-
-    //     // DONE: increment time by 1, remember we cant use "this" here.
-    //     stopwatch.time++;
-
-    //     // DONE: Get the current time, pass that into the stopwatch.timeConverter function,
-    //     //       and save the result in a variable.
-    //     var converted = stopwatch.timeConverter(stopwatch.time);
-    //     console.log(converted);
-
-    //     // DONE: Use the variable we just created to show the converted time in the "display" div.
-    //     $("#display").text(converted);
-    //   },
-    //   timeConverter: function(t) {
-
-    //     var minutes = Math.floor(t / 60);
-    //     var seconds = t - (minutes * 60);
-
-    //     if (seconds < 10) {
-    //       seconds = "0" + seconds;
-    //     }
-
-    //     if (minutes === 0) {
-    //       minutes = "00";
-    //     }
-    //     else if (minutes < 10) {
-    //       minutes = "0" + minutes;
-    //     }
-
-    //     return minutes + ":" + seconds;
-    //   }
-    // };
 });
