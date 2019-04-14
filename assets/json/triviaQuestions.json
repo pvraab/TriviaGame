@@ -1,0 +1,24 @@
+{
+  "qa":[
+    {
+      "question":"Who Loves Eliza? (My Fair Lady)", 
+      "ans":["Freddie", "Professor Higgins", "Major Pickering", "Her Dad"],
+      "corrAns": "Freddie"
+    },
+    {
+      "question":"What grows in Oklahoma? (Oklahoma)", 
+      "ans":["Corn", "Wheat", "Tomatoes", "Dirt"],
+      "corrAns": "Corn"
+    },
+    {
+      "question":"What does a performer need to do? (Singin In The Rain)", 
+      "ans":["Sing", "Dance", "Make Them Laugh", "Make Money"],
+      "corrAns": "Make Them Laugh"
+    },
+    {
+      "question":"What makes the world go around? (Cabaret)", 
+      "ans":["Gravity", "Inertia", "Money", "Love"],
+      "corrAns": "Money"
+    }
+  ]
+}
