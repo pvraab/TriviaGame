@@ -52,7 +52,7 @@
             <!-- Question 1 - using a form-->
             <div class="row align-items-center">
                 <div class="overlay">
-                    <div class="col-lg-12 d-flex align-items-stretch" id="timer">
+                    <div class="col-lg-12 d-flex align-items-stretch" id="question">
                         <div class="questions">
                             <p>1. Who really loved Eliza in "My Fair Lady"?</p>
                             <form class="options">
@@ -67,22 +67,51 @@
                 </div>
             </div>
 
-            <!-- Question 2 - using a form-->
+            <!-- Question 1 - using a form-->
             <div class="row align-items-center">
                 <div class="overlay">
                     <div class="col-lg-12 d-flex align-items-stretch" id="timer">
                         <div class="questions">
-                            <p>2. What do they grow in Oklahoma"?</p>
-                            <form class="options">
-                                <input class="option" type="radio" name="question2" value=4>Corn<br>
-                                <input class="option" type="radio" name="question2" value=3>Tomatoes<br>
-                                <input class="option" type="radio" name="question2" value=2>Wheat<br>
-                                <input class="option" type="radio" name="question2" value=1>Olives</br>
-                            </form>
-                        </div>
 
+                            <h1> Question </h1>
+
+                            <p>What is the best color to wear after dark?</p>
+                            <form>
+                                <label>
+                                    <input type="checkbox" name="q4" class="grey"></input>grey</label>
+                                <label>
+                                    <input type="checkbox" name="q4" class="black"></input>black</label>
+                                <label>
+                                    <input type="checkbox" name="q4" class="white"></input>white</label>
+                                <label>
+                                    <input type="checkbox" name="q4" class="red"></input>red</label>
+                                <label>
+                                    <input type="checkbox" name="q4" id="correct"></input>reflective yellow</label>
+                                <br />
+                                <button class="submit4">Submit</button>
+                            </form>
+
+                        </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="default-text">
+                <div class="inlinechoice">
+                    <a href="#" class="link" id="1">Choice 1</a>
+                    <a href="#" class="link" id="2">Choice 2</a>
+                    <a href="#" class="link" id="3">Choice 3</a>
+                </div>
+            </div>
+
+            <div class="about-1 hide">
+                <p>You picked 1</p>
+            </div>
+            <div class="about-2 hide">
+                <p>You picked 2</p>
+            </div>
+            <div class="about-3 hide">
+                <p>You picked 3</p>
             </div>
 
         </div>
