@@ -11,37 +11,61 @@ $(document).ready(function () {
     // Count will keep track of the index of the currently displaying picture.
     var count = 0;
 
+    // Global variables
+    var isAns1 = false;
+    var isAns2 = false;
+
     // This will run the display image function as soon as the page loads.
     startSlideshow();
 
     // Start timer
     start();
 
+    // initialize
+    function init() {
+        var isAns1a = false;
+        var isAns1b = false;
+        var isAns1c = false;
+        var isAns1d = false;
+        var isAns2a = false;
+        var isAns2b = false;
+        var isAns2c = false;
+        var isAns2d = false;
+    }
+
     $(".questions").click(function () {
         console.log($(this));
         if (document.getElementById('ans1a').checked) {
             console.log("1a");
+            isAns1a = false;
         }
         if (document.getElementById('ans1b').checked) {
             console.log("1b");
+            isAns1b = false;
         }
         if (document.getElementById('ans1c').checked) {
             console.log("1c");
+            isAns1c = false;
         }
         if (document.getElementById('ans1d').checked) {
             console.log("1d");
+            isAns1d = true;
         }
         if (document.getElementById('ans2a').checked) {
             console.log("2a");
+            isAns2a = true;
         }
         if (document.getElementById('ans2b').checked) {
             console.log("2b");
+            isAns2b = false;
         }
         if (document.getElementById('ans2c').checked) {
             console.log("2c");
+            isAns2c = false;
         }
         if (document.getElementById('ans2d').checked) {
             console.log("2d");
+            isAns2d = false;
         }
     })
 
@@ -119,6 +143,8 @@ $(document).ready(function () {
         if (time === 0) {
             stop();
             reset();
+            displayWins();
+            init();
         }
 
         // DONE: Get the current time, pass that into the timeConverter function,
@@ -150,5 +176,22 @@ $(document).ready(function () {
         return minutes + ":" + seconds;
     }
 
+    function displayWins() {
+        $("#answers").html("");
+        var headOne = $("<h1>");
+        headOne.text("All Done!");
+        $("#answers").append(headOne);
+        var correct = $("<h1>");
+        correct.text("Correct Answers: ");
+        $("#answers").append(correct);
+        var incorrect = $("<h1>");
+        headOne.text("Incorrect Answers: ");
+        $("#answers").append(incorrect);
+        var unanswered = $("<h1>");
+        unanswered.text("Unanswered: ");
+        $("#answers").append(unanswered);
+
+
+    }
 
 });
