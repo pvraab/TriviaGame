@@ -17,6 +17,34 @@ $(document).ready(function () {
     // Start timer
     start();
 
+    $(".questions").click(function () {
+        console.log($(this));
+        if (document.getElementById('ans1a').checked) {
+            console.log("1a");
+        }
+        if (document.getElementById('ans1b').checked) {
+            console.log("1b");
+        }
+        if (document.getElementById('ans1c').checked) {
+            console.log("1c");
+        }
+        if (document.getElementById('ans1d').checked) {
+            console.log("1d");
+        }
+        if (document.getElementById('ans2a').checked) {
+            console.log("2a");
+        }
+        if (document.getElementById('ans2b').checked) {
+            console.log("2b");
+        }
+        if (document.getElementById('ans2c').checked) {
+            console.log("2c");
+        }
+        if (document.getElementById('ans2d').checked) {
+            console.log("2d");
+        }
+    })
+
     // This function will replace display whatever image it's given
     // in the 'src' attribute of the img tag.
     function displayImage() {
@@ -44,15 +72,6 @@ $(document).ready(function () {
         showImage = setInterval(nextImage, 5000);
 
     }
-
-    // Timer code here
-    // This code will run as soon as the page loads
-    // window.onload = function () {
-    //     start();
-        // $("#stop").on("click", stop);
-        // $("#reset").on("click", reset);
-        // $("#start").on("click", start);
-    // };
 
     //  Variable that will hold our setInterval that runs the stopwatch
     var intervalId;
@@ -130,5 +149,6 @@ $(document).ready(function () {
 
         return minutes + ":" + seconds;
     }
+
 
 });
