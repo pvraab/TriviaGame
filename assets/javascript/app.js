@@ -1,10 +1,12 @@
 $(document).ready(function () {
 
     var gameData = {
+        isFirstTime: true,
         triviaData: null,
-        userAnswers: [],
+        userAnswers: [-1, -1, -1, -1],
         correct: 0,
-        incorrect: 0
+        incorrect: 0,
+        noAns: 0
     }
 
     // Variables to control 
@@ -18,10 +20,10 @@ $(document).ready(function () {
 
     // prevents the clock from being sped up unnecessarily
     var mainClockRunning = false;
-    var mainTimeHold = 6;
+    var mainTimeHold = 30;
     var mainTime = mainTimeHold;
     var scoreClockRunning = false;
-    var scoreTimeHold = 3;
+    var scoreTimeHold = 8;
     var scoreTime = scoreTimeHold;
 
     // This will run the display image function as soon as the page loads.
@@ -32,21 +34,27 @@ $(document).ready(function () {
 
     initGame();
 
-    $("body").on("click", "#meClick", function () {
-        console.log("Here 1" + $(this));
-        console.log(this);
-        console.log($(this));
-    });
-
-
+    // Initialize game to start conditions
     function initGame() {
-        console.log("In init game");
         $('#empty-div').empty();
-        loadJSON();
+        gameData.userAnswers = [-1, -1, -1, -1];
+        gameData.correct = 0;
+        gameData.incorrect = 0;
+        gameData.noAns = 0;
+
+        // First time through read JSON file with questions and answers
+        if (gameData.isFirstTime) {
+            loadJSON();
+            isFirstTime = false;
+        }
+        // Other times through create HTML with questions and answers
+        else {
+            createTriviaHTML();
+        }
     }
 
+    // Initialize score to start conditions
     function initScore() {
-        console.log("In init score");
         $('#empty-div').empty();
         loadScore();
     }
@@ -85,7 +93,7 @@ $(document).ready(function () {
         var converted = timeConverter(mainTime);
 
         // Change the "display" div to current time
-        $("#display").text(converted);
+        $("#display").text("Game Timer: " + converted);
 
     }
 
@@ -99,7 +107,7 @@ $(document).ready(function () {
         var converted = timeConverter(mainTime);
 
         // Change the "display" div to current time
-        $("#display").text(converted);
+        $("#display").text("Score Timer: " + converted);
 
     }
 
@@ -136,10 +144,9 @@ $(document).ready(function () {
         // Get the current time, pass that into the timeConverter function,
         // and save the result in a variable.
         var converted = timeConverter(mainTime);
-        console.log("In main count down timer" + converted);
 
         // Use the variable we just created to show the converted time in the "display" div.
-        $("#display").text(converted);
+        $("#display").text("Game Timer: " + converted);
 
     }
 
@@ -160,10 +167,9 @@ $(document).ready(function () {
         // Get the current time, pass that into the timeConverter function,
         //       and save the result in a variable.
         var converted = timeConverter(scoreTime);
-        console.log("In score count down timer" + converted);
 
         // Use the variable we just created to show the converted time in the "display" div.
-        $("#display").text(converted);
+        $("#display").text("Score Timer: " + converted);
 
     }
 
@@ -199,8 +205,8 @@ $(document).ready(function () {
 
             // Store result in global variable
             gameData.triviaData = result;
-            console.log(gameData.triviaData);
 
+            // Create HTML
             createTriviaHTML();
 
         });
@@ -214,21 +220,27 @@ $(document).ready(function () {
         // Dynamically build the form for each question
         for (var i = 0; i < gameData.triviaData.qa.length; i++) {
 
-            console.log(gameData.triviaData.qa[i].question);
-
             var currentQuestion = gameData.triviaData.qa[i];
 
             var questionWrap = $('<div>').addClass('q-wrap').data('index', i);
 
             var question = $('<h3>').text(currentQuestion.question).addClass('question')
             var divForm = $("<div>").addClass("form-check form-check-inline");
-            var radioButton1 = $("<input>").addClass("form-check-input").attr("type", "radio").attr("name", "inlineRadioOptions" + i).data('ans-index', 0).data('q-index', i);
+            var radioButton1 = $("<input>").addClass("form-check-input ans-option")
+            radioButton1.attr("type", "radio").attr("name", "inlineRadioOptions" + i)
+            radioButton1.data('ans-index', 0).data('q-index', i);
             var labelForm1 = $("<label>").addClass("form-check-label").text(currentQuestion.ans[0]);
-            var radioButton2 = $("<input>").addClass("form-check-input").attr("type", "radio").attr("name", "inlineRadioOptions" + i).data('ans-index', 1).data('q-index', i);
+            var radioButton2 = $("<input>").addClass("form-check-input ans-option")
+            radioButton2.attr("type", "radio").attr("name", "inlineRadioOptions" + i)
+            radioButton2.data('ans-index', 1).data('q-index', i);
             var labelForm2 = $("<label>").addClass("form-check-label").text(currentQuestion.ans[1]);
-            var radioButton3 = $("<input>").addClass("form-check-input").attr("type", "radio").attr("name", "inlineRadioOptions" + i).data('ans-index', 2).data('q-index', i);
+            var radioButton3 = $("<input>").addClass("form-check-input ans-option")
+            radioButton3.attr("type", "radio").attr("name", "inlineRadioOptions" + i).data('ans-index', 2)
+            radioButton3.data('q-index', i);
             var labelForm3 = $("<label>").addClass("form-check-label").text(currentQuestion.ans[2]);
-            var radioButton4 = $("<input>").addClass("form-check-input").attr("type", "radio").attr("name", "inlineRadioOptions" + i).data('ans-index', 3).data('q-index', i);
+            var radioButton4 = $("<input>").addClass("form-check-input ans-option")
+            radioButton4.attr("type", "radio").attr("name", "inlineRadioOptions" + i)
+            radioButton4.data('ans-index', 3).data('q-index', i);
             var labelForm4 = $("<label>").addClass("form-check-label").text(currentQuestion.ans[3]);
             divForm.append(radioButton1, labelForm1, radioButton2, labelForm2, radioButton3, labelForm3, radioButton4, labelForm4, );
 
@@ -242,13 +254,17 @@ $(document).ready(function () {
 
     // Load score and display
     function loadScore() {
+
         $("#questionsScore").html("All Done!!!");
+
+        // Check answers
+        validateAnswers();
 
         var scoreWrap = $('<div>');
 
-        var corrAns = $('<h3>').text("Correct Answers: ");
-        var wrongAns = $('<h3>').text("Incorrect Answers: ");
-        var unAns = $('<h3>').text("Unanswered: ");
+        var corrAns = $('<h3>').text("Correct Answers: " + gameData.correct);
+        var wrongAns = $('<h3>').text("Incorrect Answers: " + gameData.incorrect);
+        var unAns = $('<h3>').text("Unanswered: " + gameData.noAns);
 
         $(scoreWrap).append(corrAns, wrongAns, unAns);
 
@@ -256,39 +272,28 @@ $(document).ready(function () {
 
     };
 
-
+    // Manage user answer selection
     $('#empty-div').on('click', '.ans-option', function () {
-        var selectedOption = $(this).text();
         var questionIndex = $(this).data('q-index');
-        gameData[questionIndex] = selectedOption;
-        console.log("Click " + gameData[questionIndex]);
+        var ansIndex = $(this).data('ans-index');
+        gameData.userAnswers[questionIndex] = ansIndex;
+
     });
 
-
+    // Check answers against correct answer
     function validateAnswers() {
-        if (response.qa.length === gameData.userAnswers.length) {
-            // user completed the game
-            response.qa.forEach(function (elem, i) {
-                elem.corrAns
-                if (elem.corrAns === gameData.userAnswers[i]) {
-                    gameData.correct++;
-                } else {
-                    gameData.incorrect++;
-                }
-            });
-        } else {
-            // user did not complete the game
-        }
+
+        // user completed the game
+        gameData.triviaData.qa.forEach(function (elem, i) {
+            if (gameData.userAnswers[i] === -1) {
+                gameData.noAns++;
+            } else if (elem.corrAns === elem.ans[gameData.userAnswers[i]]) {
+                gameData.correct++;
+            } else if (elem.corrAns !== elem.ans[gameData.userAnswers[i]]) {
+                gameData.incorrect++;
+            }
+        });
 
     }
-
-    function endGame() {
-        // empty '#empty-div
-        $('#empty-div').empty();
-        // display the end scores
-        // add a button to play again
-    }
-
-
 
 });
