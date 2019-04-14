@@ -1,5 +1,17 @@
 $(document).ready(function () {
 
+        //  Variable that will hold our setInterval that runs the stopwatch
+        var intervalId;
+
+        // prevents the clock from being sped up unnecessarily
+        var clockRunning = false;
+        var time = 30;
+    
+        // Win/loss variables
+        var correctAnswers = 0;
+        var incorrectAnswers = 0;
+        var unAnswered = 0;    
+
     // TODO: Put links to our images in this image array.
     var images = ["./assets/images/MyFairLady.jpg", "./assets/images/Oklahoma.jpg",
         "./assets/images/SingingInTheRain.jpg", "./assets/images/SoundOfMusic.jpg"
@@ -31,6 +43,9 @@ $(document).ready(function () {
         var isAns2b = false;
         var isAns2c = false;
         var isAns2d = false;
+        var correctAnswers = 0;
+        var incorrectAnswers = 0;
+        var unAnswered = 0;    
     }
 
     $(".questions").click(function () {
@@ -38,34 +53,42 @@ $(document).ready(function () {
         if (document.getElementById('ans1a').checked) {
             console.log("1a");
             isAns1a = false;
+            incorrectAnswers++;
         }
         if (document.getElementById('ans1b').checked) {
             console.log("1b");
             isAns1b = false;
+            incorrectAnswers++;
         }
         if (document.getElementById('ans1c').checked) {
             console.log("1c");
             isAns1c = false;
+            incorrectAnswers++;
         }
         if (document.getElementById('ans1d').checked) {
             console.log("1d");
             isAns1d = true;
+            correctAnswers++;
         }
         if (document.getElementById('ans2a').checked) {
             console.log("2a");
             isAns2a = true;
+            correctAnswers++;
         }
         if (document.getElementById('ans2b').checked) {
             console.log("2b");
             isAns2b = false;
+            incorrectAnswers++;
         }
         if (document.getElementById('ans2c').checked) {
             console.log("2c");
             isAns2c = false;
+            incorrectAnswers++;
         }
         if (document.getElementById('ans2d').checked) {
             console.log("2d");
             isAns2d = false;
+            incorrectAnswers++;
         }
     })
 
@@ -96,13 +119,6 @@ $(document).ready(function () {
         showImage = setInterval(nextImage, 5000);
 
     }
-
-    //  Variable that will hold our setInterval that runs the stopwatch
-    var intervalId;
-
-    // prevents the clock from being sped up unnecessarily
-    var clockRunning = false;
-    var time = 30;
 
     function reset() {
 
@@ -182,16 +198,16 @@ $(document).ready(function () {
         headOne.text("All Done!");
         $("#answers").append(headOne);
         var correct = $("<h1>");
-        correct.text("Correct Answers: ");
+        correct.text("Correct Answers: " + correctAnsers);
         $("#answers").append(correct);
         var incorrect = $("<h1>");
-        headOne.text("Incorrect Answers: ");
+        headOne.text("Incorrect Answers: " + incorrectAnsers);
         $("#answers").append(incorrect);
         var unanswered = $("<h1>");
-        unanswered.text("Unanswered: ");
+        unanswered.text("Unanswered: " + unanswered);
         $("#answers").append(unanswered);
 
-
+s
     }
 
 });
