@@ -29,8 +29,6 @@ function startSlideshow() {
 // Display the next image
 function nextImage() {
 
-    $("#wrapper").css('background-image', 'url("' + images[count] + '")');
-
     // Use a setTimeout to run displayImage
     setTimeout(displayImage, 5000);
 
