@@ -19,6 +19,16 @@
       "question":"What makes the world go around? (Cabaret)", 
       "ans":["Gravity", "Inertia", "Money", "Love"],
       "corrAns": "Money"
+    },
+    {
+      "question":"Bye Bye? (All That Jazz)", 
+      "ans":["Birdie", "Life", "Dolly", "Bye"],
+      "corrAns": "Life"
+    },
+    {
+      "question":"Whats wrong in River City? (The Music Man)", 
+      "ans":["Pollution", "Climate Change", "Poverty", "Pool"],
+      "corrAns": "Pool"
     }
   ]
 }

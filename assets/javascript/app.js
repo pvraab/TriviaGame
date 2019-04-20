@@ -1,3 +1,12 @@
+// JavaScript for Bootcamp Homework #5
+// Paul Raab
+// Raab Enterprises LLC
+// 4/13/2019
+// Building a Trivia game
+// ToDo 
+// Look at the harder assignment and do that
+// Add buttons to override timers
+// Usse animate to fade backgrounnd grapahics in and out
 $(document).ready(function () {
 
     var gameData = {
@@ -18,7 +27,7 @@ $(document).ready(function () {
     var mainIntervalObj;
     var scoreIntervalObj;
 
-    // prevents the clock from being sped up unnecessarily
+    // Prevents the clock from being sped up unnecessarily
     var mainClockRunning = false;
     var mainTimeHold = 30;
     var mainTime = mainTimeHold;

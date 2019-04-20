@@ -1,5 +1,11 @@
+// JavaScript for Bootcamp Homework #5
+// Paul Raab
+// Raab Enterprises LLC
+// 4/13/2019
+// Building a Trivia game
 // Data and functions to control the cycling of
 // background images.
+// Put this in a separate JavaaScript file since it is self-contained
 
 // Put links to our images in this image array.
 var images = ["./assets/images/MyFairLady.jpg", "./assets/images/Oklahoma.jpg",
