@@ -139,8 +139,12 @@ $(document).ready(function () {
     // Count down function for main game timer
     function countdownGameTimer() {
 
-        // increment time by 1, remember we cant use "this" here.
-        mainTime--;
+        // Get the current time, pass that into the timeConverter function,
+        // and save the result in a variable.
+        var converted = timeConverter(mainTime);
+
+        // Use the variable we just created to show the converted time in the "display" div.
+        $("#display").text("Game Timer: " + converted);
 
         // Reset when zero
         if (mainTime === 0) {
@@ -150,20 +154,20 @@ $(document).ready(function () {
             startScoreTimer();
         }
 
-        // Get the current time, pass that into the timeConverter function,
-        // and save the result in a variable.
-        var converted = timeConverter(mainTime);
-
-        // Use the variable we just created to show the converted time in the "display" div.
-        $("#display").text("Game Timer: " + converted);
+        // Decrement time by 1
+        mainTime--;
 
     }
 
     // Count down function for score display timer
     function countdownScoreTimer() {
 
-        // increment time by 1, remember we cant use "this" here.
-        scoreTime--;
+        // Get the current time, pass that into the timeConverter function,
+        // and save the result in a variable.
+        var converted = timeConverter(scoreTime);
+
+        // Use the variable we just created to show the converted time in the "display" div.
+        $("#display").text("Score Timer: " + converted);
 
         // Reset when zero
         if (scoreTime === 0) {
@@ -173,17 +177,14 @@ $(document).ready(function () {
             startGameTimer();
         }
 
-        // Get the current time, pass that into the timeConverter function,
-        //       and save the result in a variable.
-        var converted = timeConverter(scoreTime);
-
-        // Use the variable we just created to show the converted time in the "display" div.
-        $("#display").text("Score Timer: " + converted);
-
+        // Decrement time by 1
+        scoreTime--;
     }
 
     // Convert time to minutes and seconds
     function timeConverter(t) {
+
+        console.log("Time = " + t);
 
         var minutes = Math.floor(t / 60);
         var seconds = t - (minutes * 60);
