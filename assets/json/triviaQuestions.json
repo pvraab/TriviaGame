@@ -1,7 +1,7 @@
 {
   "qa":[
     {
-      "question":"Who Loves Eliza? (My Fair Lady)", 
+      "question":"Who loves Eliza? (My Fair Lady)", 
       "ans":["Freddie", "Professor Higgins", "Major Pickering", "Her Dad"],
       "corrAns": "Freddie"
     },
